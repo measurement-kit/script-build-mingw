@@ -1,0 +1,35 @@
+#!/bin/sh
+set -ex
+PKG_TOPDIR=$(cd $(dirname $0) && pwd -P)
+PKG_NAME=measurement-kit
+PKG_VERSION=0.9.0-alpha
+PKG_CHECKSUM=fdfe9fe0155492e11d1c51ff470c27e60c54f093652bd44a147f370a76e670e7
+PKG_URL=https://github.com/measurement-kit/measurement-kit/archive/v$PKG_VERSION.tar.gz
+PKG_BUILD=1
+[ "$PKG_OS" != "" -a "$PKG_ARCH" != "" ]
+PKG_FULLNAME=$PKG_NAME/$PKG_VERSION-$PKG_BUILD
+PKG_BUILDDIR=$PKG_TOPDIR/MK_BUILD/$PKG_OS/$PKG_FULLNAME/$PKG_ARCH
+PKG_INSTALLDIR=$PKG_TOPDIR/MK_DIST/$PKG_OS/$PKG_FULLNAME/$PKG_ARCH
+rm -rf $PKG_BUILDDIR $PKG_INSTALLDIR
+install -d $PKG_BUILDDIR $PKG_INSTALLDIR
+(
+  set -ex
+  cd $PKG_BUILDDIR
+  curl -LsO $PKG_URL
+  REAL_CHECKSUM=$(cmake -E sha256sum v$PKG_VERSION.tar.gz | awk '{print $1}')
+  [ $PKG_CHECKSUM = "$REAL_CHECKSUM" ]
+  tar -xzf v$PKG_VERSION.tar.gz
+  cd $PKG_NAME-$PKG_VERSION
+  ./autogen.sh -n
+  GEOIP_PREFIX=$PKG_TOPDIR/MK_DIST/$PKG_OS/geoip-api-c/1.6.12-1/$PKG_ARCH/
+  LIBRESSL_PREFIX=$PKG_TOPDIR/MK_DIST/$PKG_OS/libressl/2.6.4-1/$PKG_ARCH/
+  LIBEVENT_PREFIX=$PKG_TOPDIR/MK_DIST/$PKG_OS/libevent/2.1.8-1/$PKG_ARCH/
+  ./configure --prefix=/ --disable-shared --disable-examples                   \
+    --disable-binaries --with-geoip=$GEOIP_PREFIX                              \
+    --with-libevent=$LIBEVENT_PREFIX --with-libressl=$LIBRESSL_PREFIX          \
+    $PKG_CONFIGUREFLAGS
+  make V=0
+  make install DESTDIR=$PKG_INSTALLDIR
+  rm -rf $PKG_INSTALLDIR/lib/libmeasurement_kit.la
+  rm -rf $PKG_INSTALLDIR/include/measurement_kit/README.md
+)

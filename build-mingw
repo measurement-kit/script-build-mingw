@@ -1,0 +1,9 @@
+#!/bin/sh
+set -e
+while [ $# -gt 0 ]; do
+  PKG_SCRIPTNAME=$1
+  shift
+  for ARCH in i386 x86_64; do
+    ./cross-mingw $ARCH ./$PKG_SCRIPTNAME
+  done
+done

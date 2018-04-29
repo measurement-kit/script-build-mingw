@@ -1,0 +1,10 @@
+#!/bin/sh
+set -e
+while [ $# -gt 0 ]; do
+  PKG_SCRIPTNAME=$1
+  shift
+  for ARCH in armeabi-v7a arm64 x86 x86_64; do
+    ./toolchain-android $ARCH
+    ./cross-android $ARCH ./$PKG_SCRIPTNAME
+  done
+done

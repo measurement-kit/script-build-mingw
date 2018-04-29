@@ -1,0 +1,50 @@
+#!/bin/sh
+
+usage() {
+  echo "Usage: $0 [-c <channel>] [package...]" 1>&2
+  echo "" 1>&2
+  echo "If no package is specified from the command line we will seach" 1>&2
+  echo "for package names in './mk-requirements.txt'." 1>&2
+  echo ""
+  echo "Valid channel names are: 'testing' and 'stable'." 1>&2
+}
+
+ARGS=`getopt c: $*`
+if [ $? -ne 0 ]; then
+  usage
+  exit 1
+fi
+set -- $ARGS
+PKG_CHANNEL=testing
+while [ $# -ne 0 ]; do
+  case "$1"
+  in
+    -c)
+      PKG_CHANNEL="$1"; shift;;
+    --)
+      shift; break;;
+  esac
+done
+if [ $# -eq 0 ]; then
+  if [ ! -f ./mk-requirements.txt ]; then
+    usage
+    exit 1
+  fi
+fi
+
+set -ex
+PKG_TOPDIR=$(cd $(dirname $0) && pwd -P)
+cd $PKG_TOPDIR
+PKG_REPO=https://github.com/measurement-kit/prebuilt/releases/download
+while [ $# -gt 0 ]; do
+  PKG_FULLNAME=$1
+  shift
+  PKG_TARBALL=$PKG_FULLNAME.tar.gz
+  rm -rf $PKG_TARBALL
+  curl -LsO $PKG_REPO/$PKG_CHANNEL/$PKG_TARBALL
+  REAL_CHECKSUM=`cmake -E sha256sum $PKG_TARBALL`
+  EXPECTED=`grep $PKG_TARBALL SHA256SUMS`
+  [ "$REAL_CHECKSUM" = "$EXPECTED" ]
+  tar -xzf $PKG_TARBALL
+done
+echo "All packages installed in: $PKG_TOPDIR/MK_DIST"

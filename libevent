@@ -1,0 +1,39 @@
+#!/bin/sh
+set -ex
+PKG_TOPDIR=$(cd $(dirname $0) && pwd -P)
+PKG_NAME=libevent
+PKG_VERSION=2.1.8
+PKG_CHECKSUM=316ddb401745ac5d222d7c529ef1eada12f58f6376a66c1118eee803cb70f83d
+PKG_URL=https://github.com/libevent/libevent/archive/release-$PKG_VERSION-stable.tar.gz
+PKG_BUILD=1
+[ "$PKG_OS" != "" -a "$PKG_ARCH" != "" ]
+PKG_FULLNAME=$PKG_NAME/$PKG_VERSION-$PKG_BUILD
+PKG_BUILDDIR=$PKG_TOPDIR/MK_BUILD/$PKG_OS/$PKG_FULLNAME/$PKG_ARCH
+PKG_INSTALLDIR=$PKG_TOPDIR/MK_DIST/$PKG_OS/$PKG_FULLNAME/$PKG_ARCH
+rm -rf $PKG_BUILDDIR $PKG_INSTALLDIR
+install -d $PKG_BUILDDIR $PKG_INSTALLDIR
+(
+  set -ex
+  cd $PKG_BUILDDIR
+  curl -LsO $PKG_URL
+  REAL_CHECKSUM=$(cmake -E sha256sum release-$PKG_VERSION-stable.tar.gz | awk '{print $1}')
+  [ $PKG_CHECKSUM = "$REAL_CHECKSUM" ]
+  tar -xzf release-$PKG_VERSION-stable.tar.gz
+  cd $PKG_NAME-release-$PKG_VERSION-stable
+  patch -Np1 -i $PKG_TOPDIR/libevent-000.patch
+  ./autogen.sh
+  LIBRESSL_PREFIX=$PKG_TOPDIR/MK_DIST/$PKG_OS/libressl/2.6.4-1/$PKG_ARCH/
+  export CPPFLAGS="${CPPFLAGS} -I${LIBRESSL_PREFIX}/include"
+  export LDFLAGS="${LDFLAGS} -L${LIBRESSL_PREFIX}/lib"
+  ./configure --prefix=/ --disable-shared --disable-samples                    \
+    --disable-libevent-regress --disable-clock-gettime $PKG_CONFIGUREFLAGS
+  make V=0
+  make install DESTDIR=$PKG_INSTALLDIR
+  rm -rf $PKG_INSTALLDIR/bin
+  rm -rf $PKG_INSTALLDIR/lib/pkgconfig
+  rm -rf $PKG_INSTALLDIR/lib/libevent_openssl.la
+  rm -rf $PKG_INSTALLDIR/lib/libevent_extra.la
+  rm -rf $PKG_INSTALLDIR/lib/libevent.la
+  rm -rf $PKG_INSTALLDIR/lib/libevent_core.la
+  rm -rf $PKG_INSTALLDIR/lib/libevent_pthreads.la
+)

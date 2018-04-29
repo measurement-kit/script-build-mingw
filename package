@@ -1,0 +1,16 @@
+#!/bin/sh
+set -e
+PKG_TOPDIR=$(cd $(dirname $0) && pwd -P)
+for PKG_OS in `ls MK_DIST`; do
+  for PKG_NAME in `ls MK_DIST/$PKG_OS`; do
+    for PKG_VERSION_FULL in `ls MK_DIST/$PKG_OS/$PKG_NAME`; do
+      PKG_TARBALL=$PKG_OS-$PKG_NAME-$PKG_VERSION_FULL.tar.gz
+      if grep -q $PKG_TARBALL SHA256SUMS; then
+        echo "WARNING: $PKG_TARBALL has already been packaged; skipping"
+        continue
+      fi
+      tar -czf $PKG_TARBALL MK_DIST/$PKG_OS/$PKG_NAME/$PKG_VERSION_FULL
+      cmake -E sha256sum $PKG_TARBALL >> SHA256SUMS
+    done
+  done
+done
