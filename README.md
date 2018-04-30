@@ -68,6 +68,8 @@ $ which gcc
 
 where the important part is `/mingw64/bin` as opposed to `/usr/bin`.
 
+From such shell, run:
+
 ```
 ./build-msys2-x86_64 geoip-api-c
 ./build-msys2-x86_64 libressl
