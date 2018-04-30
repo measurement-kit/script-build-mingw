@@ -1,7 +1,8 @@
-# Package MK and dependencies for Unix and MSYS2/MINGW
+# Package MK and deps for Unix and MSYS2/MINGW
 
 This repository contains the scripts to compile and package MK and its
-dependencies on Unix systems as well as with MSYS2/MINGW.
+dependencies on Unix systems (especially iOS and Android) as well as with
+MSYS2/MINGW (i.e. Windows using a Unix cross toolchain).
 
 ## Build and package
 
