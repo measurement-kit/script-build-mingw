@@ -24,8 +24,8 @@ export LD=$TOOLCHAIN_NAME-ld
 export RANLIB=$TOOLCHAIN_NAME-ranlib
 export STRIP=$TOOLCHAIN_NAME-strip
 export PKG_CONFIGUREFLAGS="--host=$TOOLCHAIN_NAME"
-export CFLAGS="-O2"
-export CXXFLAGS="-O2"
+export CFLAGS="-O2 ${CFLAGS}"
+export CXXFLAGS="-O2 ${CXXFLAGS}"
 export PKG_OS=mingw
 export PKG_ARCH
 if [ $# -gt 0 ]; then
