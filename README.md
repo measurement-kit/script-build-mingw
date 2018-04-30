@@ -15,8 +15,6 @@ In addition to Unix essential commands, you'll need:
 - cmake
 - curl
 - make
-- g++ or clang (must be C++14-capable)
-- libstdc++ or libc++ (again must be C++14-capable)
 - git
 
 ### iOS
