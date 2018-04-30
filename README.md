@@ -97,6 +97,12 @@ Then run:
 ./install <package-name>
 ```
 
+By default, the `testing` release channel is used. To override:
+
+```
+./install -c stable <package-name>
+```
+
 For example (valid at the moment of writing this file):
 
 ```
