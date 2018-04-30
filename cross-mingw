@@ -27,6 +27,7 @@ export PKG_CONFIGUREFLAGS="--host=$TOOLCHAIN_NAME"
 export CFLAGS="-O2"
 export CXXFLAGS="-O2"
 export PKG_OS=mingw
+export PKG_ARCH
 if [ $# -gt 0 ]; then
     $@
 else
