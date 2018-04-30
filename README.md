@@ -1,4 +1,4 @@
-# Package MK and dependencies for Unix
+# Package MK and dependencies for Unix and MSYS2/MINGW
 
 This repository contains the scripts to compile and package MK and its
 dependencies on Unix systems as well as with MSYS2/MINGW.
