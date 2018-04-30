@@ -13,3 +13,4 @@ ff5d3c77f3127f4c975cca4060ef49dcd67fc65a3477bb02be9720c1860073b7  ios-geoip-api-
 1bf818d64f0d3f56fffacd16edeb94a4b27836c432bae4369e53bc9ea41b375b  mingw-geoip-api-c-1.6.12-2.tar.gz
 8e2a622b4048cb9bbf433d2ea7c7898ed4e731b142e6f5bbd0f81c5ce220bcaa  mingw-libressl-2.6.4-3.tar.gz
 5dde7315e403640e68986c93b6c979bc94faf4c2f18c5041361b08327b4d7fae  mingw-libevent-2.1.8-3.tar.gz
+daf3546b06efd9a10553498ad1c3478db92daea745cbe307a897e403cea5108b  mingw-measurement-kit-0.9.0-alpha-3.tar.gz

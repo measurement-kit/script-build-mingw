@@ -11,7 +11,9 @@ if [ "$PKG_ARCH" = "armv7s" -o "$PKG_ARCH" = "arm64" ]; then
   PKG_CONFIGUREFLAGS="--host=arm-apple-darwin --target=arm-apple-darwin"
   MINVERSION="-miphoneos-version-min=$MINIOSVERSION"
   if [ "$PKG_ARCH" = "armv7s" ]; then
-    EXTRA_CPPFLAGS="-DMK_NO_THREAD_LOCAL" # See #1404
+    # See measurement-kit/measurement-kit#1404
+    # TODO(bassosimone): This should be in `./measurement-kit`
+    EXTRA_CPPFLAGS="-DMK_NO_THREAD_LOCAL"
   fi
   PLATFORM=iphoneos
 elif [ "$PKG_ARCH" = "i386" ]; then
