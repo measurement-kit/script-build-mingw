@@ -6,7 +6,7 @@ PKG_NAME=libressl
 PKG_VERSION=2.6.4
 PKG_CHECKSUM=638a20c2f9e99ee283a841cd787ab4d846d1880e180c4e96904fc327d419d11f
 PKG_URL=https://ftp.openbsd.org/pub/OpenBSD/LibreSSL/$PKG_NAME-$PKG_VERSION.tar.gz
-PKG_BUILD=2
+PKG_BUILD=3
 [ "$PKG_OS" != "" -a "$PKG_ARCH" != "" ]
 PKG_FULLNAME=$PKG_NAME/$PKG_VERSION-$PKG_BUILD
 PKG_BUILDDIR=$PKG_TOPDIR/MK_BUILD/$PKG_OS/$PKG_FULLNAME/$PKG_ARCH
@@ -21,6 +21,7 @@ install -d $PKG_BUILDDIR $PKG_INSTALLDIR
   [ $PKG_CHECKSUM = "$REAL_CHECKSUM" ]
   tar -xzf $PKG_NAME-$PKG_VERSION.tar.gz
   cd $PKG_NAME-$PKG_VERSION
+  patch -Np1 -i $PKG_TOPDIR/libressl-000.patch
   autoreconf -i
   ./configure --prefix=/ --disable-shared $PKG_CONFIGUREFLAGS
   make V=0
