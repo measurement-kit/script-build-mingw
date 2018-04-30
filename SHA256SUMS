@@ -6,3 +6,7 @@ ff5d3c77f3127f4c975cca4060ef49dcd67fc65a3477bb02be9720c1860073b7  ios-geoip-api-
 87b4b4478f1cbbe67228a7bba6cce437f37dbd5cbbcd9af7490b364b696b3644  ios-libevent-2.1.8-2.tar.gz
 847186ecf7415fcd536a1aa5343c28c453ad07f8e9e98aadd481fff303c26331  ios-libressl-2.6.4-2.tar.gz
 5997139fbe5c9c09d3014a825a01a33f4808d6012145ad5f9dfe733d23ca4409  ios-measurement-kit-0.9.0-alpha-2.tar.gz
+40431ce94c4ccffe18dae3121d8c949943e3f5b91af684237f6192c389f0cf0b  android-geoip-api-c-1.6.12-2.tar.gz
+3d3670f9c9dd6391fa6a54d3413f0527741ec32e8b2337cfbb54caa419e4d181  android-libevent-2.1.8-2.tar.gz
+3249f67a96e6d17051f1136a207e8c5a06a1b7759f58cd655041947c7a4a25ca  android-libressl-2.6.4-2.tar.gz
+4827e044c3ca047a37549e6861ead6e9d29c29b313e368794ecb1e467e906168  android-measurement-kit-0.9.0-alpha-2.tar.gz
