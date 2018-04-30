@@ -82,7 +82,8 @@ From such shell, run:
 
 Packages are published in a [measurement-kit/prebuilt](
 https://github.com/measurement-kit/prebuilt) release. There should be
-two releases: `stable` and `testing`; choose wisely :-P.
+two releases: `stable` and `testing`. Depending on whether you are sure
+that this is a stable build or not, use the former or the latter.
 
 ## Downloading packages
 
