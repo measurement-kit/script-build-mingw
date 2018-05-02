@@ -1,8 +1,8 @@
-# Package MK and deps for Unix and MSYS2/MINGW
+# Package MK and deps for Unix and MSYS2/Mingw-w64
 
 This repository contains the scripts to compile and package MK and its
 dependencies on Unix systems (especially iOS and Android) as well as with
-MSYS2/MINGW (i.e. Windows using a Unix cross toolchain).
+MSYS2/Mingw-w64 (i.e. Windows using a Unix cross toolchain).
 
 Note: if you want to build for Windows using Microsoft tooling, use
 [measurement-kit/script-build-windows](
@@ -52,7 +52,7 @@ export NDK_ROOT=/path/to/ndk/root # ~/Library/Android/sdk/ndk-bundle on iOS
 ./package
 ```
 
-### MSYS/MINGW
+### MSYS/Mingw-w64
 
 We assume that you have installed [MSYS2](https://www.msys2.org/) on a
 Windows system (we generally use Windows 10).
