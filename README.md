@@ -4,6 +4,10 @@ This repository contains the scripts to compile and package MK and its
 dependencies on Unix systems (especially iOS and Android) as well as with
 MSYS2/MINGW (i.e. Windows using a Unix cross toolchain).
 
+Note: if you want to build for Windows using Microsoft tooling, use
+[measurement-kit/script-build-windows](
+https://github.com/measurement-kit/script-build-windows) instead.
+
 ## Build and package
 
 By following this procedure, you will find tarball packages in the root
@@ -15,7 +19,7 @@ In addition to Unix essential commands, you'll need:
 - cmake
 - curl
 - make
-- git
+- patch
 
 ### iOS
 
