@@ -29,6 +29,11 @@ From a macOS system with Xcode and command line developer tools installed:
 ./package
 ```
 
+We currently do not build dependencies and MK with bitcode enabled, but this
+has been reported to work. See [measurement-kit/measurement-kit#658](
+https://github.com/measurement-kit/measurement-kit/issues/658)
+for hints on the process.
+
 ### Android
 
 We assume that you have the Native Development Kit (NDK) installed. The simplest
