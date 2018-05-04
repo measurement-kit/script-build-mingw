@@ -52,38 +52,20 @@ export NDK_ROOT=/path/to/ndk/root # ~/Library/Android/sdk/ndk-bundle on iOS
 ./package
 ```
 
-### MSYS/Mingw-w64
+### Mingw-w64
 
-We assume that you have installed [MSYS2](https://www.msys2.org/) on a
-Windows system (we generally use Windows 10).
+We assume that you have installed a mingw-w64 distribution compiled with
+support for POSIX threads an C++11 threads. We provide one such distribution
+as part of our [homebrew tap](
+https://github.com/measurement-kit/homebrew-measurement-kit).
 
-Inside of MSYS, you should install the following packages:
-
-```
-base-devel
-mingw-w64-x86_64-toolchain
-```
-
-For now, we only support building for Windows `x86_64`.
-
-A possible source of troubles is that MSYS2 provides you with three
-shells: normal, 32 bit, and 64 bit development. If you're in the 64 bit
-shell, the `gcc` compiler reported by which should be like:
+With such distribution installed, just run:
 
 ```
-$ which gcc
-/mingw64/bin/gcc
-```
-
-where the important part is `/mingw64/bin` as opposed to `/usr/bin`.
-
-From such shell, run:
-
-```
-./build-msys2-x86_64 geoip-api-c
-./build-msys2-x86_64 libressl
-./build-msys2-x86_64 libevent
-./build-msys2-x86_64 measurement-kit
+./build-mingw geoip-api-c
+./build-mingw libressl
+./build-mingw libevent
+./build-mingw measurement-kit
 ./package
 ```
 
