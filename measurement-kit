@@ -2,17 +2,17 @@
 set -ex
 PKG_TOPDIR=$(cd $(dirname $0) && pwd -P)
 PKG_NAME=measurement-kit
-PKG_VERSION=0.9.0-alpha
-PKG_CHECKSUM=fdfe9fe0155492e11d1c51ff470c27e60c54f093652bd44a147f370a76e670e7
+PKG_VERSION=0.9.0-alpha.1
+PKG_CHECKSUM=ec38319ba30e4d124c89af42dd1217d31d3fe07cf08574dc15062acc0b5aa3c6
 PKG_URL=https://github.com/measurement-kit/measurement-kit/archive/v$PKG_VERSION.tar.gz
-PKG_BUILD=4
+PKG_BUILD=1
 [ "$PKG_OS" != "" -a "$PKG_ARCH" != "" ]
 PKG_FULLNAME=$PKG_NAME/$PKG_VERSION-$PKG_BUILD
 PKG_BUILDDIR=$PKG_TOPDIR/MK_BUILD/$PKG_OS/$PKG_FULLNAME/$PKG_ARCH
 PKG_INSTALLDIR=$PKG_TOPDIR/MK_DIST/$PKG_OS/$PKG_FULLNAME/$PKG_ARCH
-PKG_GEOIP_VERSION=1.6.12-2
-PKG_LIBRESSL_VERSION=2.6.4-3
-PKG_LIBEVENT_VERSION=2.1.8-3
+PKG_GEOIP_VERSION=1.6.12-3
+PKG_LIBRESSL_VERSION=2.6.4-4
+PKG_LIBEVENT_VERSION=2.1.8-4
 rm -rf $PKG_BUILDDIR $PKG_INSTALLDIR
 install -d $PKG_BUILDDIR $PKG_INSTALLDIR
 (
@@ -34,7 +34,7 @@ install -d $PKG_BUILDDIR $PKG_INSTALLDIR
   ./configure --prefix=/ --disable-shared --disable-examples                   \
     --disable-binaries --with-geoip=$GEOIP_PREFIX                              \
     --with-libevent=$LIBEVENT_PREFIX --with-openssl=$LIBRESSL_PREFIX           \
-    $PKG_CONFIGUREFLAGS
+    $PKG_CONFIGUREFLAGS CPPFLAGS="$CPPFLAGS -Wno-cpp"
   make V=0
   make install DESTDIR=$PKG_INSTALLDIR
   rm -rf $PKG_INSTALLDIR/lib/libmeasurement_kit.la
