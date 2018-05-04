@@ -1,8 +1,8 @@
-# Package MK and deps for Unix and MSYS2/Mingw-w64
+# Package MK and deps for Unix and Mingw-w64
 
 This repository contains the scripts to compile and package MK and its
 dependencies on Unix systems (especially iOS and Android) as well as with
-MSYS2/Mingw-w64 (i.e. Windows using a Unix cross toolchain).
+Mingw-w64 (i.e. Windows using a Unix cross toolchain).
 
 Note: if you want to build for Windows using Microsoft tooling, use
 [measurement-kit/script-build-windows](
