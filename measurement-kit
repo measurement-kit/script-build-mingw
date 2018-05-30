@@ -2,8 +2,8 @@
 set -ex
 PKG_TOPDIR=$(cd $(dirname $0) && pwd -P)
 PKG_NAME=measurement-kit
-PKG_VERSION=0.9.0-alpha.1
-PKG_CHECKSUM=ec38319ba30e4d124c89af42dd1217d31d3fe07cf08574dc15062acc0b5aa3c6
+PKG_VERSION=0.9.0-alpha.2
+PKG_CHECKSUM=dfb31a9e654e6e3ec3ddb0231decafef7732c223b07eca90c30ac354fb344dd2
 PKG_URL=https://github.com/measurement-kit/measurement-kit/archive/v$PKG_VERSION.tar.gz
 PKG_BUILD=1
 [ "$PKG_OS" != "" -a "$PKG_ARCH" != "" ]
@@ -27,10 +27,6 @@ install -d $PKG_BUILDDIR $PKG_INSTALLDIR
   GEOIP_PREFIX=$PKG_TOPDIR/MK_DIST/$PKG_OS/geoip-api-c/$PKG_GEOIP_VERSION/$PKG_ARCH/
   LIBRESSL_PREFIX=$PKG_TOPDIR/MK_DIST/$PKG_OS/libressl/$PKG_LIBRESSL_VERSION/$PKG_ARCH/
   LIBEVENT_PREFIX=$PKG_TOPDIR/MK_DIST/$PKG_OS/libevent/$PKG_LIBEVENT_VERSION/$PKG_ARCH/
-  if [ "$PKG_OS" = "mingw" ]; then
-    # TODO(bassosimone): use builtin CA bundle with mingw
-    PKG_CONFIGUREFLAGS="$PKG_CONFIGUREFLAGS --with-ca-bundle=cert.pem"
-  fi
   ./configure --prefix=/ --disable-shared --disable-examples                   \
     --disable-binaries --with-geoip=$GEOIP_PREFIX                              \
     --with-libevent=$LIBEVENT_PREFIX --with-openssl=$LIBRESSL_PREFIX           \
