@@ -5,7 +5,7 @@ PKG_NAME=measurement-kit
 PKG_VERSION=0.9.0-alpha.2
 PKG_CHECKSUM=dfb31a9e654e6e3ec3ddb0231decafef7732c223b07eca90c30ac354fb344dd2
 PKG_URL=https://github.com/measurement-kit/measurement-kit/archive/v$PKG_VERSION.tar.gz
-PKG_BUILD=1
+PKG_BUILD=2
 [ "$PKG_OS" != "" -a "$PKG_ARCH" != "" ]
 PKG_FULLNAME=$PKG_NAME/$PKG_VERSION-$PKG_BUILD
 PKG_BUILDDIR=$PKG_TOPDIR/MK_BUILD/$PKG_OS/$PKG_FULLNAME/$PKG_ARCH
