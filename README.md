@@ -45,11 +45,17 @@ and recommended way to get the NDK is to install it along with Android Studio:
 
 ```
 export NDK_ROOT=/path/to/ndk/root # ~/Library/Android/sdk/ndk-bundle on iOS
+./build-android geoip-api-c2
+./build-android libressl
+./build-android libevent
+./build-android measurement-kit
+./package export NDK_ROOT=/path/to/ndk/root # ~/Library/Android/sdk/ndk-bundle on iOS
 ./build-android geoip-api-c
 ./build-android libressl
 ./build-android libevent
 ./build-android measurement-kit
-./package
+./package SHA256SUM
+
 ```
 
 ### Mingw-w64
