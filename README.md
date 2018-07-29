@@ -44,7 +44,7 @@ We assume that you have the Native Development Kit (NDK) installed. The simplest
 and recommended way to get the NDK is to install it along with Android Studio:
 
 ```
-export NDK_ROOT=/path/to/ndk/root # ~/Library/Android/sdk/ndk-bundle on iOS
+export NDK_ROOT=/path/to/ndk/root  # ~/Library/Android/sdk/ndk-bundle on macOS
 ./build-android geoip-api-c
 ./build-android libressl
 ./build-android libevent
