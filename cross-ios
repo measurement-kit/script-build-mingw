@@ -19,6 +19,7 @@ if [ "$PKG_ARCH" = "armv7s" -o "$PKG_ARCH" = "arm64" ]; then
 elif [ "$PKG_ARCH" = "i386" ]; then
   PKG_CONFIGUREFLAGS="--host=i386-apple-darwin --target=i386-apple-darwin"
   MINVERSION="-mios-simulator-version-min=$MINIOSVERSION"
+  EXTRA_CPPFLAGS="-DMK_NO_THREAD_LOCAL"
   PLATFORM=iphonesimulator
 elif [ "$PKG_ARCH" = "x86_64" ]; then
   PKG_CONFIGUREFLAGS="--host=x86_64-apple-darwin --target=x86_64-apple-darwin"
