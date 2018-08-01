@@ -26,6 +26,7 @@ In addition to Unix essential commands, you'll need:
 From a macOS system with Xcode and command line developer tools installed:
 
 ```
+./build-ios geoip-api-c  # deprecated
 ./build-ios libmaxminddb
 ./build-ios libressl
 ./build-ios libevent
@@ -45,6 +46,7 @@ and recommended way to get the NDK is to install it along with Android Studio:
 
 ```
 export NDK_ROOT=/path/to/ndk/root  # ~/Library/Android/sdk/ndk-bundle on macOS
+./build-ios geoip-api-c  # deprecated
 ./build-android libmaxminddb
 ./build-android libressl
 ./build-android libevent
@@ -62,6 +64,7 @@ https://github.com/measurement-kit/homebrew-measurement-kit).
 With such distribution installed, just run:
 
 ```
+./build-ios geoip-api-c  # deprecated
 ./build-mingw libmaxminddb
 ./build-mingw libressl
 ./build-mingw libevent
