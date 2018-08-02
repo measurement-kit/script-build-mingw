@@ -48,3 +48,7 @@ bb187979784a91f7e2070d5ed2667de0289796e77822fe2756e9b882f4b1113c  mingw-libevent
 1ad2a8b2f831f2c4502042533d9d6f4f4cc0754587bb00006fc7160d9b056fc4  ios-measurement-kit-0.9.0-alpha.4-1.tar.gz
 75914d56c2c381967d3e61b1f00212e0fd8c2f1bb85eaf13d5b5f5e68b753447  macos-measurement-kit-0.9.0-alpha.4-1.tar.gz
 95bc22bf3be92c60a5131df4126d31964b49b6bf57066779f1d9c4ddcffc33b2  mingw-measurement-kit-0.9.0-alpha.4-1.tar.gz
+a4fa702e0507cdda6b7dc3f52d3d1b73671047d8337e2d38eeedb276d21c0727  android-measurement-kit-0.9.0-alpha.5-1.tar.gz
+ac22996ba1adc15404f40989e9126dccbaf3fbf86bbb25e2fa74e3d26ff413a1  ios-measurement-kit-0.9.0-alpha.5-1.tar.gz
+fd4847d2a57bdc73cdbf58bc4f5bbbaf361c32a856805dc5309e5030b7fd58b5  macos-measurement-kit-0.9.0-alpha.5-1.tar.gz
+9d5293722753a6f22be8e31fa3d172b23576b8943b0139d10a91fb1115d268fc  mingw-measurement-kit-0.9.0-alpha.5-1.tar.gz
