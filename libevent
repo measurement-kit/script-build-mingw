@@ -5,8 +5,8 @@ PKG_NAME=libevent
 PKG_VERSION=2.1.8
 PKG_CHECKSUM=316ddb401745ac5d222d7c529ef1eada12f58f6376a66c1118eee803cb70f83d
 PKG_URL=https://github.com/libevent/libevent/archive/release-$PKG_VERSION-stable.tar.gz
-PKG_BUILD=4
-PKG_LIBRESSL_VERSION=2.6.4-4
+PKG_BUILD=7
+PKG_LIBRESSL_VERSION=2.7.4-1
 [ "$PKG_OS" != "" -a "$PKG_ARCH" != "" ]
 PKG_FULLNAME=$PKG_NAME/$PKG_VERSION-$PKG_BUILD
 PKG_BUILDDIR=$PKG_TOPDIR/MK_BUILD/$PKG_OS/$PKG_FULLNAME/$PKG_ARCH
@@ -22,6 +22,7 @@ install -d $PKG_BUILDDIR $PKG_INSTALLDIR
   tar -xzf release-$PKG_VERSION-stable.tar.gz
   cd $PKG_NAME-release-$PKG_VERSION-stable
   patch -Np1 -i $PKG_TOPDIR/libevent-000.patch
+  patch -Np1 -i $PKG_TOPDIR/libevent-001.patch
   ./autogen.sh
   LIBRESSL_PREFIX=$PKG_TOPDIR/MK_DIST/$PKG_OS/libressl/$PKG_LIBRESSL_VERSION/$PKG_ARCH/
   export CPPFLAGS="${CPPFLAGS} -I${LIBRESSL_PREFIX}/include"
