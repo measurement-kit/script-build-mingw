@@ -2,8 +2,8 @@
 set -ex
 PKG_TOPDIR=$(cd $(dirname $0) && pwd -P)
 PKG_NAME=measurement-kit
-PKG_VERSION=0.9.0-alpha.3
-PKG_CHECKSUM=d17a0e5d8677e89bba17ecfbe5ab6fba132eb9b364fb112bc6a22a09d9f5b3e5
+PKG_VERSION=0.9.0-alpha.4
+PKG_CHECKSUM=118b5cb0f553c38efbe99a493cd44227ae17705305c8d313b20f8730fbb14168
 PKG_URL=https://github.com/measurement-kit/measurement-kit/archive/v$PKG_VERSION.tar.gz
 PKG_BUILD=1
 [ "$PKG_OS" != "" -a "$PKG_ARCH" != "" ]

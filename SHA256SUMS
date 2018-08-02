@@ -44,3 +44,7 @@ bb187979784a91f7e2070d5ed2667de0289796e77822fe2756e9b882f4b1113c  mingw-libevent
 95deda71adffa03a5bcbc35e2698e40a46385695e3330ebdd4c3421f4c125c3f  mingw-libmaxminddb-1.3.2-2.tar.gz
 18aa1e152084a52f1dcd58992aba07242018ae6359119a8543ff1485c6fa21e7  mingw-libressl-2.7.4-1.tar.gz
 71cef501838a6364aecb8e28cc4c69c812115f30be306dd8c91090333692b3e8  mingw-measurement-kit-0.9.0-alpha.3-1.tar.gz
+998a250836a007a68ee64dabffdd4aa9a4e4366582887d32a1fd98c9a6da39b3  android-measurement-kit-0.9.0-alpha.4-1.tar.gz
+1ad2a8b2f831f2c4502042533d9d6f4f4cc0754587bb00006fc7160d9b056fc4  ios-measurement-kit-0.9.0-alpha.4-1.tar.gz
+75914d56c2c381967d3e61b1f00212e0fd8c2f1bb85eaf13d5b5f5e68b753447  macos-measurement-kit-0.9.0-alpha.4-1.tar.gz
+95bc22bf3be92c60a5131df4126d31964b49b6bf57066779f1d9c4ddcffc33b2  mingw-measurement-kit-0.9.0-alpha.4-1.tar.gz
