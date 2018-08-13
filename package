@@ -10,7 +10,7 @@ for PKG_OS in `ls MK_DIST`; do
         continue
       fi
       tar -czf $PKG_TARBALL MK_DIST/$PKG_OS/$PKG_NAME/$PKG_VERSION_FULL
-      cmake -E sha256sum $PKG_TARBALL >> SHA256SUMS
+      shasum -a 256 $PKG_TARBALL >> SHA256SUMS
     done
   done
 done

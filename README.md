@@ -16,7 +16,6 @@ directory and an updated SHA256SUM file that you should commit.
 In addition to Unix essential commands, you'll need:
 
 - GNU autoconf, automake, and libtool
-- cmake
 - curl
 - make
 - patch

@@ -17,7 +17,7 @@ install -d $PKG_BUILDDIR $PKG_INSTALLDIR
   set -ex
   cd $PKG_BUILDDIR
   curl -LsO $PKG_URL
-  REAL_CHECKSUM=$(cmake -E sha256sum release-$PKG_VERSION-stable.tar.gz | awk '{print $1}')
+  REAL_CHECKSUM=$(shasum -a 256 release-$PKG_VERSION-stable.tar.gz | awk '{print $1}')
   [ $PKG_CHECKSUM = "$REAL_CHECKSUM" ]
   tar -xzf release-$PKG_VERSION-stable.tar.gz
   cd $PKG_NAME-release-$PKG_VERSION-stable
