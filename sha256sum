@@ -1,6 +1,0 @@
-#!/bin/sh
-# This is a portable version of sha256sum
-# cmake doesn't include the sha256sum command in older versions
-command -v shasum >/dev/null && shasum -a 256 $1 && exit 0
-cmake -E sha256sum $@ && exit 0
-exit 1
