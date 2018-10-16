@@ -33,18 +33,29 @@ if [ $# -eq 0 ]; then
 fi
 
 CURRENT_DIR=$(pwd -P)
-set -ex
+set -e
 PKG_TOPDIR=$(cd $(dirname $0) && pwd -P)
 PKG_REPO=https://github.com/measurement-kit/prebuilt/releases/download
 while [ $# -gt 0 ]; do
-  PKG_FULLNAME=$1
+  REGEX='^(android|ios|linux|macos|mingw)'
+  if ! echo $1 | grep -Eq $REGEX; then
+    echo "FATAL: package stem does not match: $REGEX" 1>&2
+    exit 1
+  fi
+  PKG_TARBALL=`cat SHA256SUMS | grep $1 | awk '{print $2}'|tail -n1`
+  if [ "$PKG_TARBALL" = "" ]; then
+    echo "FATAL: No package named: $1" 1>&2
+    exit 1
+  fi
   shift
-  PKG_TARBALL=$PKG_FULLNAME.tar.gz
+  echo "Installing $PKG_TARBALL from $PKG_CHANNEL"
+  set -x
   rm -rf $PKG_TARBALL
-  curl -LsO $PKG_REPO/$PKG_CHANNEL/$PKG_TARBALL
+  curl -fsSLO $PKG_REPO/$PKG_CHANNEL/$PKG_TARBALL
   REAL_CHECKSUM=`shasum -a 256 $PKG_TARBALL`
   EXPECTED=`grep $PKG_TARBALL $PKG_TOPDIR/SHA256SUMS`
   [ "$REAL_CHECKSUM" = "$EXPECTED" ]
   tar -xzf $PKG_TARBALL
+  set +x
 done
 echo "All packages installed in: $CURRENT_DIR/MK_DIST"
