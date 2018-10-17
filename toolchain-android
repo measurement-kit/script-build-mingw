@@ -8,12 +8,14 @@ if [ $# -ne 1 ]; then
   echo "" 1>&2
   exit 1
 fi
+
+ROOTDIR=$(cd $(dirname $0) && pwd -P)
+export NDK_ROOT=`$ROOTDIR/config-android-ndk-root`
 if [ "$NDK_ROOT" = "" ]; then
-  echo "FATAL: you must set NDK_ROOT" 1>&2
+  echo "FATAL: unable to determine NDK_ROOT; please export NDK_ROOT=/path." 1>&2
   exit 1
 fi
 
-ROOTDIR=$(cd $(dirname $0) && pwd -P)
 ARCH=$1
 shift
 BASEDIR=$ROOTDIR/MK_BUILD/toolchain/android
@@ -27,11 +29,10 @@ if [ "$ARCH" = "armeabi-v7a" ]; then
   ARCH="arm"
 fi
 
-# See https://github.com/measurement-kit/measurement-kit/pull/1554#discussion_r167493143
-if [ "$ARCH" = "arm64" -o "$ARCH" = "mips64" -o "$ARCH" = "x86_64" ]; then
-  API=21
-else
-  API=16
+API=`$ROOTDIR/config-android-api $ARCH`
+if [ "$API" = "" ]; then
+  echo "FATAL: unable to determine API for $ARCH" 1>&2
+  exit 1
 fi
 
 MAKE_TOOLCHAIN=${NDK_ROOT}/build/tools/make_standalone_toolchain.py

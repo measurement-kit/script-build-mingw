@@ -20,6 +20,15 @@ export ANDROID_TOOLCHAIN=${ROOTDIR}/MK_BUILD/toolchain/android/${ARCH}
 # Directory under the toolchain where we have headers and libs
 export SYSROOT=${ANDROID_TOOLCHAIN}/sysroot
 
+# We need to know the minimum API number to enforce the minimum by
+# appending to the LLVM_TRIPLE below. Otherwise, we will compile
+# objects targeting the latest available android API.
+export API=`./config-android-api $ARCH`
+if [ "$API" = "" ]; then
+  echo "FATAL: unable to determine the API for $ARCH" 1>&2
+  exit 1
+fi
+
 #
 # Map the selected architecture to useful variables:
 #
@@ -32,6 +41,7 @@ if [ "$ARCH" = "arm64" ]; then
   # Note: arm64 is also known as aarch64 and as armv8
   TOOLCHAIN_NAME=aarch64-linux-android
   DESTDIR_NAME=arm64-v8a
+  ANDROID_ARCH_FLAGS="-target aarch64-none-linux-android$API"
 elif [ "$ARCH" = "armeabi-v7a" ]; then
   TOOLCHAIN_NAME=arm-linux-androideabi
   DESTDIR_NAME=$ARCH
@@ -39,14 +49,16 @@ elif [ "$ARCH" = "armeabi-v7a" ]; then
   # <Bandwagon>These flags have been copied from the flags used by
   # ndk-build when building measurement-kit as a C++ library</>.
   #
-  ANDROID_ARCH_FLAGS="-target armv7-none-linux-androideabi -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -mthumb"
+  ANDROID_ARCH_FLAGS="-target armv7-none-linux-androideabi$API -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -mthumb"
 elif [ "$ARCH" = "x86" ]; then
   TOOLCHAIN_NAME=i686-linux-android
   DESTDIR_NAME=x86
+  ANDROID_ARCH_FLAGS="-target i686-none-linux-android$API"
 elif [ "$ARCH" = "x86_64" ]; then
   TOOLCHAIN_NAME=x86_64-linux-android
   DESTDIR_NAME=x86_64
   LIB_SUFFIX=64
+  ANDROID_ARCH_FLAGS="-target x86_64-none-linux-android$API"
 else
   echo "$0: invalid $ARCH" 1>&2
   exit 1

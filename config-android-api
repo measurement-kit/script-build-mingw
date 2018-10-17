@@ -1,0 +1,11 @@
+#!/bin/sh
+set -e
+# Important not to print anything in case of error.
+if [ $# -ne 1 ]; then exit 1; fi
+# See https://github.com/measurement-kit/measurement-kit/pull/1554#discussion_r167493143
+if echo $1 | grep -q 64; then
+  API=21
+else
+  API=16
+fi
+echo $API

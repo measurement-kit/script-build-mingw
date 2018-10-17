@@ -1,0 +1,16 @@
+#!/bin/sh
+set -e
+# Important not to print anything in case of error
+if [ $# -ne 0 ]; then exit 1; fi
+if [ "$NDK_ROOT" != "" ]; then
+  echo "$NDK_ROOT"
+  exit 0
+fi
+if [ "`uname -s`" = "Darwin" ]; then
+  NDK_ROOT=$HOME/Library/Android/sdk/ndk-bundle
+  if [ -d "$NDK_ROOT" ]; then
+    echo "$NDK_ROOT"
+    exit 0
+  fi
+fi
+exit 1
