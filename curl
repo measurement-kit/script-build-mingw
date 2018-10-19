@@ -1,0 +1,62 @@
+#!/bin/sh
+set -ex
+PKG_TOPDIR=$(cd $(dirname $0) && pwd -P)
+PKG_NAME=curl
+PKG_VERSION=7.61.1
+PKG_TAG=`echo $PKG_VERSION | sed 's/\./_/g'`
+PKG_CHECKSUM=eaa812e9a871ea10dbe8e1d3f8f12a64a8e3e62aeab18cb23742e2f1727458ae
+PKG_URL=https://github.com/curl/curl/releases/download/$PKG_NAME-$PKG_TAG/$PKG_NAME-$PKG_VERSION.tar.gz
+PKG_BUILD=2
+PKG_LIBRESSL_VERSION=2.7.4-1
+[ "$PKG_OS" != "" -a "$PKG_ARCH" != "" ]
+PKG_FULLNAME=$PKG_NAME/$PKG_VERSION-$PKG_BUILD
+PKG_BUILDDIR=$PKG_TOPDIR/MK_BUILD/$PKG_OS/$PKG_FULLNAME/$PKG_ARCH
+PKG_INSTALLDIR=$PKG_TOPDIR/MK_DIST/$PKG_OS/$PKG_FULLNAME/$PKG_ARCH
+rm -rf $PKG_BUILDDIR $PKG_INSTALLDIR
+install -d $PKG_BUILDDIR $PKG_INSTALLDIR
+(
+  set -ex
+  cd $PKG_BUILDDIR
+  curl -fsSLO $PKG_URL
+  REAL_CHECKSUM=$(shasum -a 256 $PKG_NAME-$PKG_VERSION.tar.gz | awk '{print $1}')
+  [ $PKG_CHECKSUM = "$REAL_CHECKSUM" ]
+  tar -xzf $PKG_NAME-$PKG_VERSION.tar.gz
+  cd $PKG_NAME-$PKG_VERSION
+  ./buildconf
+  LIBRESSL_PREFIX=$PKG_TOPDIR/MK_DIST/$PKG_OS/libressl/$PKG_LIBRESSL_VERSION/$PKG_ARCH/
+  PKG_CONFIGUREFLAGS="$PKG_CONFIGUREFLAGS --disable-ftp"
+  PKG_CONFIGUREFLAGS="$PKG_CONFIGUREFLAGS --disable-file"
+  PKG_CONFIGUREFLAGS="$PKG_CONFIGUREFLAGS --disable-ldap"
+  PKG_CONFIGUREFLAGS="$PKG_CONFIGUREFLAGS --disable-ldaps"
+  PKG_CONFIGUREFLAGS="$PKG_CONFIGUREFLAGS --disable-rtsp"
+  PKG_CONFIGUREFLAGS="$PKG_CONFIGUREFLAGS --disable-dict"
+  PKG_CONFIGUREFLAGS="$PKG_CONFIGUREFLAGS --disable-telnet"
+  PKG_CONFIGUREFLAGS="$PKG_CONFIGUREFLAGS --disable-tftp"
+  PKG_CONFIGUREFLAGS="$PKG_CONFIGUREFLAGS --disable-pop3"
+  PKG_CONFIGUREFLAGS="$PKG_CONFIGUREFLAGS --disable-imap"
+  PKG_CONFIGUREFLAGS="$PKG_CONFIGUREFLAGS --disable-smb"
+  PKG_CONFIGUREFLAGS="$PKG_CONFIGUREFLAGS --disable-smtp"
+  PKG_CONFIGUREFLAGS="$PKG_CONFIGUREFLAGS --disable-gopher"
+  PKG_CONFIGUREFLAGS="$PKG_CONFIGUREFLAGS --disable-manual"
+  PKG_CONFIGUREFLAGS="$PKG_CONFIGUREFLAGS --enable-ipv6"
+  PKG_CONFIGUREFLAGS="$PKG_CONFIGUREFLAGS --disable-sspi"
+  PKG_CONFIGUREFLAGS="$PKG_CONFIGUREFLAGS --disable-ntlm-wb"
+  PKG_CONFIGUREFLAGS="$PKG_CONFIGUREFLAGS --disable-tls-srp"
+  PKG_CONFIGUREFLAGS="$PKG_CONFIGUREFLAGS --with-pic=yes"
+  PKG_CONFIGUREFLAGS="$PKG_CONFIGUREFLAGS --without-ca-bundle"
+  PKG_CONFIGUREFLAGS="$PKG_CONFIGUREFLAGS --without-libidn2"
+  # TODO(bassosimone): --enable-pthreads and --disable-rt are mutually
+  # exclusive, but I seem to recall that on some old iOS devices we did
+  # not have support for librt. Hence, for now, I'll build a simpler
+  # cURL engine using a non-threaded resolver.
+  PKG_CONFIGUREFLAGS="$PKG_CONFIGUREFLAGS --disable-rt"
+  PKG_CONFIGUREFLAGS="$PKG_CONFIGUREFLAGS --disable-threaded-resolver"
+  PKG_CONFIGUREFLAGS="$PKG_CONFIGUREFLAGS --with-ssl=$LIBRESSL_PREFIX"
+  ./configure --prefix=/ --disable-shared $PKG_CONFIGUREFLAGS
+  make V=0
+  make install DESTDIR=$PKG_INSTALLDIR
+  rm -rf $PKG_INSTALLDIR/bin
+  rm -rf $PKG_INSTALLDIR/lib/libcurl.la
+  rm -rf $PKG_INSTALLDIR/lib/pkgconfig
+  rm -rf $PKG_INSTALLDIR/share
+)
