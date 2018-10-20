@@ -42,7 +42,7 @@ while [ $# -gt 0 ]; do
     echo "FATAL: package stem does not match: $REGEX" 1>&2
     exit 1
   fi
-  PKG_TARBALL=`cat SHA256SUMS | grep $1 | awk '{print $2}'|tail -n1`
+  PKG_TARBALL=`cat $PKG_TOPDIR/SHA256SUMS | grep $1 | awk '{print $2}'|tail -n1`
   if [ "$PKG_TARBALL" = "" ]; then
     echo "FATAL: No package named: $1" 1>&2
     exit 1
@@ -52,8 +52,8 @@ while [ $# -gt 0 ]; do
   set -x
   rm -rf $PKG_TARBALL
   curl -fsSLO $PKG_REPO/$PKG_CHANNEL/$PKG_TARBALL
-  REAL_CHECKSUM=`shasum -a 256 $PKG_TARBALL`
-  EXPECTED=`grep $PKG_TARBALL $PKG_TOPDIR/SHA256SUMS`
+  REAL_CHECKSUM=`shasum -a 256 $PKG_TARBALL | awk '{print $1}'`
+  EXPECTED=`grep $PKG_TARBALL $PKG_TOPDIR/SHA256SUMS | awk '{print $1}'`
   [ "$REAL_CHECKSUM" = "$EXPECTED" ]
   tar -xzf $PKG_TARBALL
   set +x
