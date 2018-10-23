@@ -23,7 +23,7 @@ export SYSROOT=${ANDROID_TOOLCHAIN}/sysroot
 # We need to know the minimum API number to enforce the minimum by
 # appending to the LLVM_TRIPLE below. Otherwise, we will compile
 # objects targeting the latest available android API.
-export API=`./config-android-api $ARCH`
+export API=`$ROOTDIR/config-android-api $ARCH`
 if [ "$API" = "" ]; then
   echo "FATAL: unable to determine the API for $ARCH" 1>&2
   exit 1
