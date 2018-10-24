@@ -80,3 +80,8 @@ ecbae0bc9b841014eb4bb3e8e8ba941150613fde16fbaa4d7fd31e2b214d8379  mingw-libevent
 3ee145415dd0b64309e717b4156f04e22f1ca153b5d8efae3e7267c863ccd08d  android-libevent-2.1.8-8.tar.gz
 2d9df8aaa63d2564a70fb29c025640640a82bb879557c2d2aa7ca092f42b0857  android-libmaxminddb-1.3.2-8.tar.gz
 9385c35a35d9cfe9d954e4c0b1e57e83f980d0175e28bcf53e4dcf760504af0b  android-libressl-2.7.4-8.tar.gz
+eb85e3b27cb11475a5fef43388a4d918cc651bd4b2319bd68847dd1affa8db3f  macos-curl-7.61.1-8.tar.gz
+a7444dc53b9c8126f99823ab4e75a548ba6e6d3dbefc58c0b012d621df89d618  macos-geoip-api-c-1.6.12-8.tar.gz
+68fb78669858628bc2fdbc149ec9d1fb80eb39fd454b9fcf869c454f265875d3  macos-libevent-2.1.8-8.tar.gz
+9410beabf6891bf40e7495878d7fbf1107af3cdcef486c144b78b84e23818ab7  macos-libmaxminddb-1.3.2-8.tar.gz
+2a341ec159299ed0810e245badd9863eba9850066bd6f3984b47b52ddcdf85c0  macos-libressl-2.7.4-8.tar.gz
