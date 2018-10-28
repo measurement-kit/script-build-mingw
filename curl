@@ -45,6 +45,9 @@ install -d $PKG_BUILDDIR $PKG_INSTALLDIR
   PKG_CONFIGUREFLAGS="$PKG_CONFIGUREFLAGS --with-pic=yes"
   PKG_CONFIGUREFLAGS="$PKG_CONFIGUREFLAGS --without-ca-bundle"
   PKG_CONFIGUREFLAGS="$PKG_CONFIGUREFLAGS --without-libidn2"
+  # TODO(bassosimone): we have zlib on Android and iOS but not on
+  # mingw, so for now let's disable it.
+  PKG_CONFIGUREFLAGS="$PKG_CONFIGUREFLAGS --without-zlib"
   # TODO(bassosimone): --enable-pthreads and --disable-rt are mutually
   # exclusive, but I seem to recall that on some old iOS devices we did
   # not have support for librt. Hence, for now, I'll build a simpler
