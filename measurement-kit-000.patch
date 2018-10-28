@@ -1,0 +1,15 @@
+We have actually disabled zlib in CURL. So we need to remove this flag or it
+will not compile because it cannot find zlib.
+
+diff --git a/configure.ac b/configure.ac
+index ca52161f..13a94f60 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -56,7 +56,6 @@ MK_AM_DISABLE_TRACEROUTE
+ AC_PROG_CXX
+ 
+ MK_AM_CHECK_LIBC_FUNCS
+-MK_AM_ZLIB
+ MK_AM_OPENSSL
+ MK_AM_LIBEVENT
+ MK_AM_GEOIP
