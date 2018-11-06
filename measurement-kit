@@ -5,7 +5,7 @@ PKG_NAME=measurement-kit
 PKG_VERSION=0.9.0-beta
 PKG_CHECKSUM=98ad0106180895c28efa9fc4e720b0fb125bec9e0f0cb5aab7eb56556678f201
 PKG_URL=https://github.com/measurement-kit/measurement-kit/archive/v$PKG_VERSION.tar.gz
-PKG_BUILD=`cat VERSION`+2
+PKG_BUILD=`cat VERSION`+3
 [ "$PKG_OS" != "" -a "$PKG_ARCH" != "" ]
 PKG_FULLNAME=$PKG_NAME/$PKG_VERSION-$PKG_BUILD
 PKG_BUILDDIR=$PKG_TOPDIR/MK_BUILD/$PKG_OS/$PKG_FULLNAME/$PKG_ARCH
@@ -30,13 +30,12 @@ install -d $PKG_BUILDDIR $PKG_INSTALLDIR
   LIBEVENT_PREFIX=$PKG_TOPDIR/MK_DIST/$PKG_OS/libevent/$PKG_LIBEVENT_VERSION/$PKG_ARCH/
   LIBMAXMINDDB_PREFIX=$PKG_TOPDIR/MK_DIST/$PKG_OS/libmaxminddb/$PKG_LIBMAXMINDDB_VERSION/$PKG_ARCH/
   LIBRESSL_PREFIX=$PKG_TOPDIR/MK_DIST/$PKG_OS/libressl/$PKG_LIBRESSL_VERSION/$PKG_ARCH/
-  ./configure --prefix=/ --disable-shared --disable-examples                   \
-    --disable-binaries                                                         \
+  ./configure --prefix=/ --disable-dependency-tracking                         \
     --with-libevent=$LIBEVENT_PREFIX --with-openssl=$LIBRESSL_PREFIX           \
     --with-libcurl=$CURL_PREFIX --with-libmaxminddb=$LIBMAXMINDDB_PREFIX       \
     $PKG_CONFIGUREFLAGS CPPFLAGS="$CPPFLAGS -Wno-cpp"
   make libmeasurement_kit.la V=0
-  make install install-libLTLIBRARIES install-data-am DESTDIR=$PKG_INSTALLDIR
+  make install-libLTLIBRARIES install-data-am DESTDIR=$PKG_INSTALLDIR
   rm -rf $PKG_INSTALLDIR/lib/libmeasurement_kit.la
   rm -rf $PKG_INSTALLDIR/include/measurement_kit/README.md
 )
