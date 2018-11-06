@@ -5,7 +5,7 @@ PKG_NAME=libevent
 PKG_VERSION=2.1.8
 PKG_CHECKSUM=316ddb401745ac5d222d7c529ef1eada12f58f6376a66c1118eee803cb70f83d
 PKG_URL=https://github.com/libevent/libevent/archive/release-$PKG_VERSION-stable.tar.gz
-PKG_BUILD=`cat VERSION`+1
+PKG_BUILD=`cat VERSION`+2
 PKG_LIBRESSL_VERSION=2.8.2-`cat VERSION`+1
 [ "$PKG_OS" != "" -a "$PKG_ARCH" != "" ]
 PKG_FULLNAME=$PKG_NAME/$PKG_VERSION-$PKG_BUILD
@@ -37,6 +37,7 @@ install -d $PKG_BUILDDIR $PKG_INSTALLDIR
   rm -rf $PKG_INSTALLDIR/lib/libevent_openssl.la
   rm -rf $PKG_INSTALLDIR/lib/libevent_extra.la
   rm -rf $PKG_INSTALLDIR/lib/libevent.la
+  rm -rf $PKG_INSTALLDIR/lib/libevent.a
   rm -rf $PKG_INSTALLDIR/lib/libevent_core.la
   rm -rf $PKG_INSTALLDIR/lib/libevent_pthreads.la
 )
