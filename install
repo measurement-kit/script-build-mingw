@@ -24,6 +24,7 @@ while [ $# -gt 0 ]; do
   EXPECTED=`grep $PKG_TARBALL $PKG_TOPDIR/SHA256SUMS | awk '{print $1}'`
   [ "$REAL_CHECKSUM" = "$EXPECTED" ]
   tar -xzf $PKG_TARBALL
+  rm -rf $PKG_TARBALL
   set +x
 done
 echo "All packages installed in: $CURRENT_DIR/MK_DIST"
