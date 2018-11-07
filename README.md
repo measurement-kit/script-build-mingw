@@ -20,16 +20,14 @@ In addition to Unix essential commands, you'll need:
 - make
 - patch
 
+Each specific build has additional requirements.
+
 ### iOS
 
 From a macOS system with Xcode and command line developer tools installed:
 
 ```
-./build-ios geoip-api-c  # deprecated
-./build-ios libmaxminddb
-./build-ios libressl
-./build-ios libevent
-./build-ios measurement-kit
+./build-mingw `./all-deps.sh` measurement-kit
 ./package
 ```
 
@@ -45,61 +43,39 @@ and recommended way to get the NDK is to install it along with Android Studio:
 
 ```
 export NDK_ROOT=/path/to/ndk/root  # ~/Library/Android/sdk/ndk-bundle on macOS
-./build-ios geoip-api-c  # deprecated
-./build-android libmaxminddb
-./build-android libressl
-./build-android libevent
-./build-android measurement-kit
+./build-android `./all-deps.sh` measurement-kit
 ./package
 ```
 
 ### Mingw-w64
 
 We assume that you have installed a mingw-w64 distribution compiled with
-support for POSIX threads an C++11 threads. We provide one such distribution
-as part of our [homebrew tap](
-https://github.com/measurement-kit/homebrew-measurement-kit).
+support for POSIX threads and C++11 threads. The one provided by by
+[Homebrew](brew.sh) is the one we generally use.
 
-With such distribution installed, just run:
+With mingw-w64 installed, just run:
 
 ```
-./build-ios geoip-api-c  # deprecated
-./build-mingw libmaxminddb
-./build-mingw libressl
-./build-mingw libevent
+./build-ios `./all-deps.sh`
 ./build-mingw measurement-kit
 ./package
 ```
 
 ## Publishing packages
 
-Packages are published in a [measurement-kit/prebuilt](
-https://github.com/measurement-kit/prebuilt) release. There should be
-two releases: `stable` and `testing`. Depending on whether you are sure
-that this is a stable build or not, use the former or the latter.
+Packages are publishes as part of [script-build-unix releases](
+https://github.com/measurement-kit/script-build-unix/releases).
 
 ## Downloading packages
 
 For the download to succeed, you must have committed and pushed the
 changes to `SHA256SUM` created by the build step and published the
-related tarballs as explained in the previous step.
+related tarballs in the current release of script-build-unix.
 
 Then run:
 
 ```
 ./install <package-name>
-```
-
-By default, the `testing` release channel is used. To override:
-
-```
-./install -c stable <package-name>
-```
-
-For example (valid at the moment of writing this file):
-
-```
-./install ios-libressl-2.6.4-2
 ```
 
 This will download the related tarball, verify its SHA256 sum and unpack
@@ -126,11 +102,9 @@ that sets the proper environment variables for cross compiling.
 There may be small patches that we apply to packages. (Preferrably none but
 some small patches are better than having to do more difficult stuff.)
 
-For iOS, the toolchain is preinstalled. For Android, we also have a script
-that uses the NDK's own script to make the desired toolchain.
-
-CMake is technically not required, but often times is around and we're using
-it as a portable way to compute the SHA256 sum of a package. Sorry.
+For iOS, the toolchain is preinstalled if you have installed Xcode and the
+command line build tools. For Android, we also have a script that uses
+the NDK's own script to make the desired toolchain.
 
 We always use `make` to orchestrate the build. Set and export the `MAKEFLAGS`
 environment variable properly if you wish, e.g., to have a parallel build.
