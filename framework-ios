@@ -1,5 +1,6 @@
 #!/bin/bash
 set -e
+curdir=`pwd -P`
 while [ $# -gt 0 ]; do
   package=$1
   shift
@@ -32,7 +33,7 @@ while [ $# -gt 0 ]; do
     # Create a framework for each lib
     for lib in $libs; do
       framework=`echo $lib | sed 's/\.a$//g'`
-      frameworkdir=MK_DIST/ios-frameworks/$framework.framework
+      frameworkdir=$curdir/Framework/$framework.framework
       rm -rf $frameworkdir
       install -d $frameworkdir
       lipo -create -output $frameworkdir/$framework                            \
