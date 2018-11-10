@@ -1,0 +1,48 @@
+#!/bin/bash
+set -e
+
+mkframework() {
+  local prebuiltdir=$1
+  local frameworkdir=$2
+  local headersdir=$3
+  rm -rf $frameworkdir
+  install -d $frameworkdir
+  local framework="$(basename $frameworkdir | sed 's|\.framework$||g')"
+  echo "* Creating $frameworkdir/$framework"
+  for versiondir in $prebuiltdir/*; do
+    for archdir in $versiondir/*; do
+      local all_libs="$(find $archdir/lib -type f -name \*.a)"
+      libtool -static $all_libs -o "$frameworkdir/$(basename $archdir).a"
+    done
+  done
+  lipo -create -output "$frameworkdir/$framework" $frameworkdir/*.a
+  rm -f $frameworkdir/*.a
+  echo "* Copying machine dependent headers"
+  install -d $frameworkdir/Headers/aaa_mkarch
+  for versiondir in $prebuiltdir/*; do
+    for archdir in $versiondir/*; do
+      cp -Rp $archdir/$headersdir $frameworkdir/Headers/aaa_mkarch/$(basename $archdir)
+    done
+  done
+  echo "* Creating machine independent headers"
+  for archdir in $frameworkdir/Headers/aaa_mkarch/*; do
+    for hdr in $(cd $archdir && find . -type f | sed 's@^\.\/@@g'); do
+      install -d $frameworkdir/Headers/$(dirname $hdr)
+      touch $frameworkdir/Headers/$hdr
+      chmod 644 $frameworkdir/Headers/$hdr
+      echo "#ifdef __$(basename $archdir)__" >> $frameworkdir/Headers/$hdr
+      echo "# include \"$framework/aaa_mkarch/$(basename $archdir)/$hdr\"" >> $frameworkdir/Headers/$hdr
+      echo "#endif" >> $frameworkdir/Headers/$hdr
+    done
+  done
+}
+
+topdir=$(cd $(dirname $0) && pwd -P)
+rm -rf MK_DIST
+$topdir/install `$topdir/all-deps.sh ios-` ios-measurement-kit
+rm -rf Frameworks
+mkframework MK_DIST/ios/libmaxminddb Frameworks/maxminddb.framework include
+mkframework MK_DIST/ios/libressl Frameworks/openssl.framework include/openssl
+mkframework MK_DIST/ios/libevent Frameworks/event2.framework include/event2
+mkframework MK_DIST/ios/curl Frameworks/curl.framework include/curl
+mkframework MK_DIST/ios/measurement-kit Frameworks/measurement_kit.framework include/measurement_kit
