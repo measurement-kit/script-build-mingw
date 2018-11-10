@@ -27,13 +27,22 @@ mkframework() {
   echo "* Creating machine independent headers"
   for archdir in $frameworkdir/Headers/aaa_mkarch/*; do
     for hdr in $(cd $archdir && find . -type f | sed 's@^\.\/@@g'); do
-      install -d $frameworkdir/Headers/$(dirname $hdr)
+      local oh=$frameworkdir/Headers/$hdr
+      install -d $(dirname $oh)
       touch $frameworkdir/Headers/$hdr
-      chmod 644 $frameworkdir/Headers/$hdr
-      echo "#ifdef __$(basename $archdir)__" >> $frameworkdir/Headers/$hdr
-      echo "# include \"$framework/aaa_mkarch/$(basename $archdir)/$hdr\"" >> $frameworkdir/Headers/$hdr
-      echo "#endif" >> $frameworkdir/Headers/$hdr
+      chmod 644 $oh
+      echo "#if defined __arm64__"                           >> $oh
+      echo "# include \"$framework/aaa_mkarch/arm64/$hdr\""  >> $oh
+      echo "#elif defined __arm__"                           >> $oh
+      echo "# include \"$framework/aaa_mkarch/armv7s/$hdr\"" >> $oh
+      echo "#elif defined __x86_64__"                        >> $oh
+      echo "# include \"$framework/aaa_mkarch/x86_64/$hdr\"" >> $oh
+      echo "#else"                                           >> $oh
+      echo "# error \"No headers for your ARCH\""            >> $oh
+      echo "#endif"                                          >> $oh
+      arch_hdrs="$arch_hdrs $hdr"
     done
+    break  # Assumption: no package installs headers only for some archs
   done
 }
 
