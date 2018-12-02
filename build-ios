@@ -3,7 +3,7 @@ set -e
 while [ $# -gt 0 ]; do
   PKG_SCRIPTNAME=$1
   shift
-  for ARCH in x86_64 armv7s arm64; do
+  for ARCH in i386 x86_64 armv7s arm64; do
     ./cross-ios $ARCH ./$PKG_SCRIPTNAME
   done
 done
