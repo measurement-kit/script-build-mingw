@@ -37,6 +37,8 @@ mkframework() {
       echo "# include \"$framework/aaa_mkarch/armv7s/$hdr\"" >> $oh
       echo "#elif defined __x86_64__"                        >> $oh
       echo "# include \"$framework/aaa_mkarch/x86_64/$hdr\"" >> $oh
+      echo "#elif defined __i386__"                          >> $oh
+      echo "# include \"$framework/aaa_mkarch/i386/$hdr\""   >> $oh
       echo "#else"                                           >> $oh
       echo "# error \"No headers for your ARCH\""            >> $oh
       echo "#endif"                                          >> $oh
