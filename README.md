@@ -27,7 +27,7 @@ Each specific build has additional requirements.
 From a macOS system with Xcode and command line developer tools installed:
 
 ```
-./build-mingw `./all-deps.sh` measurement-kit
+./build-ios `./all-deps.sh` measurement-kit
 ./package
 ```
 
@@ -56,7 +56,7 @@ support for POSIX threads and C++11 threads. The one provided by by
 With mingw-w64 installed, just run:
 
 ```
-./build-ios `./all-deps.sh`
+./build-mingw `./all-deps.sh`
 ./build-mingw measurement-kit
 ./package
 ```
