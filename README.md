@@ -78,6 +78,14 @@ Then run:
 ./install <package-name>
 ```
 
+Where `<package-name>` is the name of the package (or packages) that
+you want to install. For example, a compact way to install MK and all
+its dependencies for Android is the following:
+
+```
+./install `./all-deps.sh android-` android-measurement-kit
+```
+
 This will download the related tarball, verify its SHA256 sum and unpack
 the tarball inside `./MK_DIST`. You can use `find` inside of `MK_DIST` to
 understand exactly the structure of the downloaded package.
