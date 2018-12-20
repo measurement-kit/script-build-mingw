@@ -3,7 +3,7 @@ set -e
 CURRENT_DIR=$(pwd -P)
 PKG_TOPDIR=$(cd $(dirname $0) && pwd -P)
 PKG_REPO=https://github.com/measurement-kit/script-build-unix/releases/download
-PKG_CHANNEL=v`cat ${PKG_TOPDIR}/VERSION`
+PKG_CHANNEL=v0.2.0
 while [ $# -gt 0 ]; do
   REGEX='^(android|ios|linux|macos|mingw)'
   if ! echo $1 | grep -Eq $REGEX; then
