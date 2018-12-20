@@ -6,3 +6,5 @@ a6812788c6c1f1f6bc36d543c5ad75b4f83e87384e8cb631f3b79e72d6165d05  ios-libmaxmind
 b938f277c97dfa9e9106a9cf536ba3f6bbfebddebcdcd541fadb2d2e30f95c12  ios-libevent-2.1.8+4.tar.gz
 7d39e9bd1ca555ffd3aff644fe09a76995070da7326a328e3f592b1b3f1af44c  android-curl-7.63.0+2.tar.gz
 c20d5b71624681e7eecc355d95fdcbf128f5ae7c71a2575788fb770dd067b9dc  ios-curl-7.63.0+2.tar.gz
+973531e391c02f6699ff1232826367e9e3e5d05eb4f28dcf37f1a97102cf38d0  android-measurement-kit-0.9.1+1.tar.gz
+e20ba3cc92442606a221311993ed720f00615a2ba5c7bb63adf42081b446aa7a  ios-measurement-kit-0.9.1+1.tar.gz
