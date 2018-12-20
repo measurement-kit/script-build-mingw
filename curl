@@ -6,7 +6,7 @@ PKG_VERSION=7.63.0
 PKG_TAG=`echo $PKG_VERSION | sed 's/\./_/g'`
 PKG_CHECKSUM=d483b89062832e211c887d7cf1b65c902d591b48c11fe7d174af781681580b41
 PKG_URL=https://github.com/curl/curl/releases/download/$PKG_NAME-$PKG_TAG/$PKG_NAME-$PKG_VERSION.tar.gz
-PKG_BUILD=+1
+PKG_BUILD=+2
 PKG_LIBRESSL_VERSION=2.8.3+1
 [ "$PKG_OS" != "" -a "$PKG_ARCH" != "" ]
 PKG_FULLNAME=$PKG_NAME/$PKG_VERSION$PKG_BUILD
@@ -45,6 +45,9 @@ install -d $PKG_BUILDDIR $PKG_INSTALLDIR
   PKG_CONFIGUREFLAGS="$PKG_CONFIGUREFLAGS --with-pic=yes"
   PKG_CONFIGUREFLAGS="$PKG_CONFIGUREFLAGS --without-ca-bundle"
   PKG_CONFIGUREFLAGS="$PKG_CONFIGUREFLAGS --without-libidn2"
+  # TODO(bassosimone): we have zlib on Android and iOS but not on
+  # mingw, so for now let's disable it.
+  PKG_CONFIGUREFLAGS="$PKG_CONFIGUREFLAGS --without-zlib"
   # TODO(bassosimone): --enable-pthreads and --disable-rt are mutually
   # exclusive, but I seem to recall that on some old iOS devices we did
   # not have support for librt. Hence, for now, I'll build a simpler
