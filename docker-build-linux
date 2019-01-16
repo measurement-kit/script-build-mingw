@@ -1,0 +1,13 @@
+#!/bin/sh
+set -e
+
+docker build -t mk-script-build-unix .
+
+mkdir -p MK_DIST
+mkdir -p MK_BUILD
+
+docker run \
+    -v $PWD/MK_DIST:/mk-build/MK_DIST \
+    -v $PWD/MK_BUILD/:/mk-build/MK_BUILD \
+    -t mk-script-build-unix \
+    './build-linux `./all-deps.sh` measurement-kit'
