@@ -44,5 +44,5 @@ RUN cd /mk-build \
 
 RUN cp -R /mk-build/MK_DIST "$GO_MK_DIR/libs/MK_DIST"
 
-#RUN cd "$GO_MK_DIR" \
-#    && make test
+RUN cd "$GO_MK_DIR" \
+    && make test
