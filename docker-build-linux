@@ -16,4 +16,4 @@ docker run \
     -v $PWD/MK_DIST:/mk-build/MK_DIST \
     -v $PWD/MK_BUILD/:/mk-build/MK_BUILD \
     -t mk-script-build-unix \
-    /bin/sh -c 'cd /go/src/measurement-kit/go-measurement-kit/ && cp -R /mk-build/MK_DIST ./libs/MK_DIST && make test'
+    /bin/sh -c 'cd /go/src/github.com/measurement-kit/go-measurement-kit/ && cp -R /mk-build/MK_DIST ./libs/MK_DIST && make test'
