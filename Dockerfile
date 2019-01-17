@@ -9,6 +9,7 @@ RUN apt-get install -y \
     automake pkg-config git curl gettext-base
 
 COPY . /mk-build
+RUN mkdir -p /mk-build/MK_BUILD && mkdir -p /mk-build/MK_DIST
 
 ## Golang setup
 ENV GOLANG_VERSION "1.11.4"
