@@ -35,14 +35,4 @@ RUN git clone \
     "$GO_MK_DIR" \
     && mkdir -p "$GO_MK_DIR/libs"
 
-# Build mk for linux
-RUN cd /mk-build \
-    && ./build-linux `./all-deps.sh`
-
-RUN cd /mk-build \
-    && ./build-linux measurement-kit
-
-RUN cp -R /mk-build/MK_DIST "$GO_MK_DIR/libs/MK_DIST"
-
-RUN cd "$GO_MK_DIR" \
-    && make test
+WORKDIR /mk-build
