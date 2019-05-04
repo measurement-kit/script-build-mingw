@@ -1,10 +1,7 @@
-# Package MK and deps for Unix and Mingw-w64
+# Package MK and deps for Linux and Mingw-w64
 
 This repository contains the scripts to compile and package MK and its
-dependencies on Unix systems (especially iOS, but notably not Android, for
-which [there is a separate repository](
-https://github.com/measurement-kit/script-build-android)) as well as with
-Mingw-w64 (i.e. Windows using a Unix cross toolchain).
+dependencies on Linux and Mingw-w64 systems.
 
 Note: if you want to build for Windows using Microsoft tooling, use
 [measurement-kit/script-build-windows](
@@ -23,20 +20,6 @@ In addition to Unix essential commands, you'll need:
 - patch
 
 Each specific build has additional requirements.
-
-### iOS
-
-From a macOS system with Xcode and command line developer tools installed:
-
-```
-./build-ios `./all-deps.sh` measurement-kit
-./package
-```
-
-We currently do not build dependencies and MK with bitcode enabled, but this
-has been reported to work. See [measurement-kit/measurement-kit#658](
-https://github.com/measurement-kit/measurement-kit/issues/658)
-for hints on the process.
 
 ### Mingw-w64
 
@@ -74,7 +57,7 @@ you want to install. For example, a compact way to install MK and all
 its dependencies for Android is the following:
 
 ```
-./install `./all-deps.sh android-` android-measurement-kit
+./install `./all-deps.sh linux-` linux-measurement-kit
 ```
 
 This will download the related tarball, verify its SHA256 sum and unpack
@@ -85,7 +68,7 @@ If you integrate this repository as a subdirectory, and you run install
 from the parent directory, `MK_DIST` will be inside the parent directory.
 
 ```
-./foo/bar/install ios-libressl-2.6.4-2
+./foo/bar/install linux-libressl-2.6.4-2
 # You will find the package in ./MK_DIST rather than ./foo/bar/MK_DIST
 ```
 

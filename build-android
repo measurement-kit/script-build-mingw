@@ -1,3 +1,0 @@
-#!/bin/sh
-echo "Please, use https://github.com/measurement-kit/script-build-android"
-exit 1
