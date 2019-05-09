@@ -5,7 +5,7 @@ PKG_TOPDIR=$(cd $(dirname $0) && pwd -P)
 PKG_REPO=https://github.com/measurement-kit/script-build-unix/releases/download
 PKG_CHANNEL=v0.3.0
 while [ $# -gt 0 ]; do
-  REGEX='^(android|ios|linux|macos|mingw)'
+  REGEX='^(mingw)'
   if ! echo $1 | grep -Eq $REGEX; then
     echo "FATAL: package stem does not match: $REGEX" 1>&2
     exit 1
