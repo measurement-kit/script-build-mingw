@@ -1,5 +1,9 @@
 # Package MK and deps for Mingw-w64
 
+⚠️⚠️⚠️: This repository is now unneeded and will be archived because
+we have found a better solution that involves publishing cross
+built packages using Homebrew. This simplifies our life.
+
 This repository contains the scripts to compile and package MK and its
 dependencies for Mingw-w64 systems. Previous versions of this repository
 (once named script-build-unix) used to support building for all Unix
